@@ -37,6 +37,15 @@ export const page500 = {
   component: () => import('@/views/error-page/500.vue')
 };
 
+export const roleList = {
+  path: '/roleList',
+  meta: {
+    title: '500-服务端错误'
+  },
+  name: 'roleList',
+  component: () => import('@/views/setting/roleList.vue')
+};
+
 export const locking = {
   path: '/locking',
   name: 'locking',
@@ -44,17 +53,17 @@ export const locking = {
 };
 
 // 作为Main组件的子页面展示但是不在左侧菜单显示的路由写在otherRouter里
-// export const otherRouter = {
-//   path: '/',
-//   name: 'otherRouter',
-//   redirect: '/home',
-//   component: Main,
-//   children: [
-//     { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: () => import('@/views/home/home.vue') },
-//     { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: () => import('@/views/own-space/own-space.vue') },
-//     { path: 'message', title: '消息中心', name: 'message_index', component: () => import('@/views/message/message.vue') }
-//   ]
-// };
+export const otherRouter = {
+  path: '/',
+  name: 'otherRouter',
+  redirect: '/home',
+  component: Main,
+  children: [
+    // { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: () => import('@/views/home/home.vue') },
+    // { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: () => import('@/views/own-space/own-space.vue') },
+    // { path: 'message', title: '消息中心', name: 'message_index', component: () => import('@/views/message/message.vue') }
+  ]
+};
 
 // 所有上面定义的路由都要写在下面的routers里
 export const routers = [
@@ -64,5 +73,6 @@ export const routers = [
   // ...appRouter,
   page500,
   page403,
+  roleList
   // page404
 ];
