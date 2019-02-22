@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie'
 import * as mt from '../mutation-types'
-import {getData, postData, putData,err} from '../../libs/fetchData'
-import {merge} from 'lodash'
-import {getToken, setToken, removeToken} from '../../libs/auth'
+import { getData, postData, putData, err } from '../../libs/fetchData'
+import { merge } from 'lodash'
+import { getToken, setToken, removeToken } from '../../libs/auth'
 import {
   setStore,
   getStore
@@ -57,39 +57,68 @@ const actions = {
   //     console.log('error: ', error)
   //   }
   // },
-  async login({commit}, obj) {
+  async userLogin({ commit }, obj) {
     try {
-      let res = await postData(`admin/user/login`, obj).catch(err => {
-        commit('GLOBAL_ERR', err, {root: true})
+      let res = await postData(`/api/v1/user/login`, obj).catch(err => {
+        commit('GLOBAL_ERR', err, { root: true })
       })
-      console.log(res)
-      let resUserInfo
+      console.log('resresrsesersrer', res)
+      // let resUserInfo
       switch (res.status) {
         case 200:
           setToken(res.data.access_token)
-          commit('SET_ACCESS_TOKEN', res.data.access_token)
+          commit('SET_ACCESS_TOKEN', res.data.datas.accessToken)
           commit('SET_REFRESH_TOKEN', res.data.refresh_token)
-          resUserInfo = await getData(`admin/user/info`).catch(err => {
-            commit('GLOBAL_ERR', err, {root: true})
-          })
-          console.log("res2", resUserInfo)
-          res.data.user = resUserInfo.data.data.sysUser
-          commit(mt.SET_USER, resUserInfo.data.data.sysUser)
-          commit('SET_PERMISSIONS', resUserInfo.data.data.permissions)
+          // resUserInfo = await getData(`admin/user/info`).catch(err => {
+          //   commit('GLOBAL_ERR', err, {root: true})
+          // })
+          // console.log("res2", resUserInfo)
+          // res.data.user = resUserInfo.data.data.sysUser
+          // commit(mt.SET_USER, resUserInfo.data.data.sysUser)
+          // commit('SET_PERMISSIONS', resUserInfo.data.data.permissions)
           break
         default:
           break
       }
 
-      return resUserInfo.data
+      return res.data
     } catch (error) {
       console.log('error: ', error)
     }
   },
-  async logout({commit}) {
+  async login({ commit }, obj) {
+    try {
+      let res = await postData(`/api/v1/user/login`, obj).catch(err => {
+        commit('GLOBAL_ERR', err, { root: true })
+      })
+      console.log('resresrsesersrer', res)
+      // let resUserInfo
+      switch (res.status) {
+        case 200:
+          setToken(res.data.access_token)
+          commit('SET_ACCESS_TOKEN', res.data.datas.accessToken)
+          commit('SET_REFRESH_TOKEN', res.data.refresh_token)
+          // resUserInfo = await getData(`admin/user/info`).catch(err => {
+          //   commit('GLOBAL_ERR', err, {root: true})
+          // })
+          // console.log("res2", resUserInfo)
+          // res.data.user = resUserInfo.data.data.sysUser
+          // commit(mt.SET_USER, resUserInfo.data.data.sysUser)
+          // commit('SET_PERMISSIONS', resUserInfo.data.data.permissions)
+          break
+        default:
+          break
+      }
+
+      return res.data
+    } catch (error) {
+      console.log('error: ', error)
+    }
+  },
+  async logout({ commit }) {
     try {
       let res = await postData(`auth/oauth/removeToken`, {}).catch(err => {
-        commit('GLOBAL_ERR', err, {root: true})
+        commit('GLOBAL_ERR', err, { root: true })
       })
       switch (res.data.code) {
         case 0:
@@ -114,10 +143,10 @@ const actions = {
       console.log('error: ', error)
     }
   },
-  async checkPwd({commit}, obj) {
+  async checkPwd({ commit }, obj) {
     try {
       let res = await postData(`/system/checkPwd`, obj).catch(err => {
-        commit('GLOBAL_ERR', err, {root: true})
+        commit('GLOBAL_ERR', err, { root: true })
       })
 
       switch (res.data.code) {
@@ -132,10 +161,10 @@ const actions = {
       console.log('error: ', error)
     }
   },
-  async chgPwd({commit}, obj) {
+  async chgPwd({ commit }, obj) {
     try {
       let res = await putData(`/admin/user/editInfo`, obj).catch(err => {
-        commit('GLOBAL_ERR', err, {root: true})
+        commit('GLOBAL_ERR', err, { root: true })
       })
       switch (res.data.status) {
         case 0:

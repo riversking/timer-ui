@@ -59,7 +59,7 @@ export const otherRouter = {
   redirect: '/home',
   component: Main,
   children: [
-    // { path: 'home', title: {i18n: 'home'}, name: 'home_index', component: () => import('@/views/home/home.vue') },
+    { path: 'home', title: 'home', name: 'home', component: () => import('../views/setting/home/home.vue') },
     // { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: () => import('@/views/own-space/own-space.vue') },
     // { path: 'message', title: '消息中心', name: 'message_index', component: () => import('@/views/message/message.vue') }
   ]
@@ -68,7 +68,7 @@ export const otherRouter = {
 // 所有上面定义的路由都要写在下面的routers里
 export const routers = [
   loginRouter,
-  // otherRouter,
+  otherRouter,
   locking,
   // ...appRouter,
   page500,

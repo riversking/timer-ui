@@ -5,6 +5,8 @@ import { router } from '../router/index'
 import app from './modules/app'
 import global from './modules/global'
 import user from './modules/user'
+import menu from './modules/menu'
+
 import { getToken, setToken, removeToken } from '../libs/auth'
 import getters from './getters'
 Vue.use(Vuex)
@@ -21,7 +23,8 @@ const store = new Vuex.Store({
   modules: {
     app,
     global,
-    user
+    user,
+    menu
   },
   getters
 })
@@ -56,7 +59,7 @@ instance.interceptors.response.use(
 instance.interceptors.request.use(config => {
   console.log("我是拦截器", store.getters.access_token)
   if (store.getters.access_token) {
-    config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
+    config.headers['Authorization'] = 'Bearer ' + store.getters.access_token // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
   }
   return config
 }, error => {

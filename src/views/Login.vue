@@ -48,8 +48,6 @@
         form: {
           username: 'admin',
           password: '123456',
-          code: '',
-          randomStr: ''
         },
         rules: {
           username: [
@@ -82,20 +80,15 @@
         this.$refs.loginForm.validate((valid, opt, callback) => {
           if (valid) {
             this.loading = true
-            this.form.randomStr = util.randomLenNum(4, true)
-            this.form.grant_type = 'password'
-            this.form.scope = 'server'
-            this.form.code = 'yfd4'
-            this.$store.dispatch('login', this.form).then(data => {
+            this.$store.dispatch('login', { 'param': this.form }).then(data => {
               console.log('data', data)
               switch (data.code) {
-                case 0:
-                  Cookies.set('user', JSON.stringify(data.data.sysUser))
-                  this.$store.commit('setAvator', this.avatar)
-                  this.$store.dispatch(`setting/menu/getMenu`).then(data => {
-                    this.addRoutes(data)
+                case '0':
+                  // Cookies.set('user', JSON.stringify(data.data.sysUser))
+                  this.$store.dispatch(`menu/getMenuByUserId`, { 'param': 1 }).then(data => {
+                    this.addRoutes(data.datas)
                     this.$router.push({
-                      name: 'home_index'
+                      name: 'home'
                     })
                   })
 

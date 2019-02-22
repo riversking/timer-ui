@@ -61,10 +61,10 @@ module.exports = merge(webpackBaseConfig, {
     },
     headers: { "X-Custom-Header": "yes" },
     proxy: {
-      '/admin': {
-        target: 'http://192.168.0.120:9999',
+      '/api/v1': {
+        target: 'http://localhost:10500',
         changeOrigin: true
-      }
+      },
     },
     setup: function (app) {
       // app.use('/v1/archives/list', function (req, res, next) {

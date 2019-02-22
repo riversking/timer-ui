@@ -1,6 +1,6 @@
 import lazyLoading from './lazyLoading'
 import { page404 } from '@/router/router'
-import Main from '@/views/Main.vue';
+import Main from '@/views/Main.vue'
 export default (routers, data) => {
   /**
    * 动态路由获取服务端数据
@@ -11,7 +11,10 @@ export default (routers, data) => {
   routers.push(page404)
 }
 function generaMenu (routers, data) {
-  data.forEach((item) => {
+  console.log('dadadadadadad', data)
+  data.forEach((item, index) => {
+    console.log('indexindexindexindexindexindex', index)
+
     let menu = Object.assign({}, item)
     // console.log(menu.component)
     if (menu.component === 'Main') {
