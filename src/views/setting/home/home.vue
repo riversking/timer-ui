@@ -96,17 +96,17 @@
 </template>
 
 <script>
-  import inforCard from "./components/inforCard.vue";
-  import visiteVolume from "./components/visiteVolume.vue";
-  import cityData from "./map-data/get-city-value.js";
-  import Cookies from 'js-cookie'
+  import inforCard from "./components/inforCard.vue"
+import visiteVolume from "./components/visiteVolume.vue"
+import cityData from "./map-data/get-city-value.js"
+import Cookies from 'js-cookie'
   import { mapState } from 'vuex'
 
   export default {
     name: "home",
     components: {
       visiteVolume,
-      inforCard,
+      inforCard
     },
     data() {
       return {
@@ -114,36 +114,36 @@
         toDoList: [
           {
             title: ""
-          },
+          }
         ],
         count: {
           arc: 0,
           fl: 0,
           ad: 0,
-          logs: 0,
+          logs: 0
         },
         cityData: cityData,
         showAddNewTodo: false,
         newToDoItemValue: ""
-      };
-    },
+      }
+  },
     computed: {
       avatorPath() {
-        return localStorage.avatorImgPath;
+        return localStorage.avatorImgPath
       }
     },
     methods: {
-    logout () {
-      this.$confirm('是否退出系统, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$store.dispatch('LogOut').then(() => {
-          this.$router.push({ path: '/login' })
+      logout () {
+        this.$confirm('是否退出系统, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$store.dispatch('LogOut').then(() => {
+            this.$router.push({ path: '/login' })
+          })
         })
-      })
-    }
+      }
     },
     mounted () {
       this.user = JSON.parse(Cookies.get('user'))
@@ -155,5 +155,5 @@
           this.count = Object.assign({}, this.$store.state.global.count)
         })
     }
-  };
+  }
 </script>

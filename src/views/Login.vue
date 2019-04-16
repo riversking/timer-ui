@@ -85,8 +85,8 @@
               switch (data.code) {
                 case '0':
                   // Cookies.set('user', JSON.stringify(data.data.sysUser))
-                  this.$store.dispatch(`menu/getMenuByUserId`, { 'param': 1 }).then(data => {
-                    this.addRoutes(data.datas)
+                  this.$store.dispatch(`menu/getMenuByRoleId`, { 'param': 1 }).then(data => {
+                    // this.addRoutes(data.datas)
                     this.$router.push({
                       name: 'home'
                     })
